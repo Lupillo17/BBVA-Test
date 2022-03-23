@@ -1,0 +1,64 @@
+<HTML>
+    <HEAD>
+        Definiciones de la cabecera
+        <input type="button" class="btn" value="Consultar">
+    </HEAD>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<BODY>
+    Instrucciones HTML
+</BODY>
+
+<script>
+    // function getRequest(){
+    //     var Url = 'http://api.datos.gob.mx/v1/calidadAire';
+    //     var xmlHttp = new XMLHttpRequest();
+    //     xmlHttp.open("GET", Url, false);
+    //     xmlHttp.send(null);
+    //     console.log(xmlHttp.responseText);
+    // }
+
+    $(document).ready(function(){
+        const Url = 'http://api.datos.gob.mx/v1/calidadAire';
+        $('.btn').click(function(){
+            // var settings = {
+            //     'cache': false,
+            //     'dataType': "jsonp",
+            //     "async": true,
+            //     "crossDomain": true,
+            //     "url": "http://api.datos.gob.mx/v1/calidadAire",
+            //     "method": "GET",
+            //     "headers": {
+            //         "accept": "application/json",
+            //         "Access-Control-Allow-Origin":"*"
+            //     }
+            // }
+
+            // $.ajax(settings).done(function (response) {
+            //     console.log(response);
+
+            // });
+            
+            
+            $.ajax({
+                url: Url,
+                type: "GET",
+                dataType: 'jsonp',
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                },
+                success: function(result){
+                    var data = JSON.parse(result);
+                    console.log(data);
+                },
+                error: function(error){
+                    console.log(`Error: ${error}`);
+                }
+            })
+
+            $.get(Url, function(data, status){
+                console.log(`${data}`);
+            })
+        })
+    })
+</script>
+</HTML>
